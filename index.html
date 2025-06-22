@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integración Numérica</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" type="module"></script>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Integración Numérica</h1>
+        
+        <div class="input-area">
+            <div class="function-input">
+                <label for="function">Función f(x):</label>
+                <input type="text" id="function" placeholder="Ej: sin(x^2) + 3*x">
+            </div>
+            
+            <div class="keyboard">
+                <button class="key" data-value="x">x</button>
+                <button class="key" data-value="+">+</button>
+                <button class="key" data-value="-">-</button>
+                <button class="key" data-value="*">*</button>
+                <button class="key" data-value="/">/</button>
+                <button class="key" data-value="^">^</button>
+                <button class="key" data-value="(">(</button>
+                <button class="key" data-value=")">)</button>
+                <button class="key" data-value="sin(">sin</button>
+                <button class="key" data-value="cos(">cos</button>
+                <button class="key" data-value="tan(">tan</button>
+                <button class="key" data-value="log(">log</button>
+                <button class="key" data-value="exp(">exp</button>
+                <button class="key" data-value="sqrt(">√</button>
+                <button class="key" data-value="pi">π</button>
+                <button class="key" data-value="e">e</button>
+                <button class="key" id="backspace">⌫</button>
+            </div>
+            
+            <div class="parameters">
+                <div class="param">
+                    <label for="a">Límite inferior (a):</label>
+                    <input type="number" id="a" step="any" value="0">
+                </div>
+                <div class="param">
+                    <label for="b">Límite superior (b):</label>
+                    <input type="number" id="b" step="any" value="1">
+                </div>
+                <div class="param">
+                    <label for="m">Subintervalos (M):</label>
+                    <input type="number" id="m" min="1" value="10">
+                </div>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <button id="trapecio" class="method-btn">Regla del Trapecio</button>
+            <button id="simpson" class="method-btn">Regla de Simpson</button>
+        </div>
+        
+        <div class="result-area">
+            <h2>Resultado Aproximado:</h2>
+            <div id="result" class="result-box">0.0</div>
+             <h2 class="real-value-title">Valor Real:</h2>
+            <div class="integral-expression">
+                <span class="integral-container">
+                    <span class="integral-symbol">∫</span>
+                    <span class="integral-limits">
+                        <span class="upper-limit" id="upper-limit">b</span>
+                        <span class="lower-limit" id="lower-limit">a</span>
+                    </span>
+                </span>
+                <span id="integral-function">f(x)</span> 
+                <span class="dx">dx</span> = 
+                <span id="real-result" class="result-box">0.0</span>
+            </div>
+            <div id="error-estimado" class="error-box"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,242 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+.calculator {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto; /* Centrar horizontalmente */
+}
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.input-area {
+    margin-bottom: 25px;
+}
+
+.function-input {
+    margin-bottom: 20px;
+}
+
+.function-input label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.function-input input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.key {
+    padding: 12px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.key:hover {
+    background-color: #e0e0e0;
+}
+
+#backspace {
+    grid-column: span 2;
+    background-color: #ff6b6b;
+    color: white;
+}
+
+#backspace:hover {
+    background-color: #ff5252;
+}
+
+.parameters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.param {
+    display: flex;
+    flex-direction: column;
+}
+
+.param label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.param input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    gap: 15px;
+}
+
+.method-btn {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#trapecio {
+    background-color: #3498db;
+    color: white;
+}
+
+#trapecio:hover {
+    background-color: #2980b9;
+}
+
+#simpson {
+    background-color: #2ecc71;
+    color: white;
+}
+
+#simpson:hover {
+    background-color: #27ae60;
+}
+
+.result-area {
+    text-align: center;
+}
+
+.result-area h2 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.result-box {
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    min-height: 30px;
+}
+
+@media (max-width: 600px) {
+    .parameters {
+        grid-template-columns: 1fr;
+    }
+    
+    .keyboard {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.real-value-title {
+    margin-top: 20px;
+    color: #2c3e50;
+}
+
+.integral-expression {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 15px 0;
+    gap: 5px;
+}
+
+.integral-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.integral-symbol {
+    font-size: 36px;
+    margin-right: 5px;
+}
+
+.integral-limits {
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+}
+
+.upper-limit {
+    margin-bottom: 20px; /* Espacio entre límites */
+    font-size: 16px;
+    line-height: 1;
+}
+
+.lower-limit {
+    margin-top: 20px; /* Espacio entre límites */
+    font-size: 16px;
+    line-height: 1;
+}
+
+.dx {
+    margin-left: 5px;
+}
+
+.result-box {
+    margin-left: 10px;
+}
+
+.sqrt-symbol {
+    font-size: 1.2em;
+    vertical-align: middle;
+}
+
+.error-box {
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    min-height: 30px;
+}
