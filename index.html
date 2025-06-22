@@ -6,6 +6,7 @@
     <title>Integración Numérica</title>
     <link rel="stylesheet" href="style.css">
     <script src="main.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="calculator">
@@ -75,6 +76,10 @@
                 <span id="real-result" class="result-box">0.0</span>
             </div>
             <div id="error-estimado" class="error-box"></div>
+            <div class="chart-container" style="display: none;">
+                <h2 class="real-value-title">Gráfica de la Función y los Nodos</h2>
+                <canvas id="integral-chart"></canvas>
+            </div>
         </div>
     </div>
 </body>

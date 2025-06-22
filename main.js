@@ -144,6 +144,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('lower-limit').textContent = a;
                 document.getElementById('integral-function').innerHTML = formatearFuncionParaVisualizacion(funcionStr);
             }
+
+            // Solo mostrar gráfica si M es razonable
+            const chartContainer = document.querySelector('.chart-container');
+            if (M <= 100) {
+                generarGrafica(funcionPreparada, a, b, M, metodo, funcionStr);
+                if (chartContainer) chartContainer.style.display = 'block';
+            } else {
+                if (chartContainer) chartContainer.style.display = 'none';
+                // Destruir gráfica existente
+                if (window.integralChart) {
+                    window.integralChart.destroy();
+                    window.integralChart = null;
+                }
+            }
         } catch (error) {
             alert('Error al evaluar la función: ' + error.message);
             console.error(error);
@@ -187,10 +201,99 @@ document.addEventListener('DOMContentLoaded', function() {
         
         return `${number < 0 ? '-' : ''}${coefficient}×10${superscriptExponent}`;
     }
-});
 
-/* Falta:
- 1. Hacer la grafica de la integral
- 2. Hacer los ejemplos del doc
- 3. Hacer las slides
-*/
+    // Función para generar la gráfica
+    function generarGrafica(funcionPreparada, a, b, M, metodo, funcionBasica) {
+        const ctx = document.getElementById('integral-chart').getContext('2d');
+        
+        // Destruir gráfica anterior si existe
+        if (window.integralChart) {
+            window.integralChart.destroy();
+        }
+        
+        // Generar puntos para la curva
+        const puntos = [];
+        const step = (b - a) / 200; // 200 puntos para una curva suave
+        for (let x = a; x <= b; x += step) {
+            puntos.push({x, y: evaluarFuncion(funcionPreparada, x)});
+        }
+        
+        // Generar puntos para las divisiones
+        const divisiones = [];
+        const n = metodo === 'trapecio' ? M : 2 * M; // Simpson requiere 2M subintervalos
+        const h = (b - a) / n;
+        
+        for (let i = 0; i <= n; i++) {
+            const x = a + i * h;
+            divisiones.push({
+                x,
+                y: evaluarFuncion(funcionPreparada, x)
+            });
+        }
+        
+        // Crear la gráfica
+        window.integralChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: [
+                    {
+                        label: 'f(x)',
+                        data: puntos,
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Divisiones',
+                        data: divisiones,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 1)',
+                        fill: false,
+                        pointRadius: 4,
+                        showLine: false,
+                        pointStyle: 'rectRot'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        title: {
+                            display: true,
+                            text: 'x'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'f(x)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'f(x) = '+funcionBasica
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `f(${context.parsed.x.toFixed(2)}) = ${context.parsed.y.toFixed(4)}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+});
